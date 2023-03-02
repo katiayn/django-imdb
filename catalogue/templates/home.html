@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django IMDb</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="title">
+            <h1>Django IMDb Catalogue</h1>
+            <a href="{% url 'partial_home' %}">Go to Partial Rendering Home</a>
+        </div>
+        <div class="search">
+            <form action="{% url 'search' %}" class="form">
+                <input type="text"
+                       class="search-input"
+                       name="q"
+                       value="{{ request.GET.q }}"
+                       placeholder="Search for a title"
+                >
+            </form>
+        </div>
+    </header>
+    <main>
+        <article id="results">
+            <div class="results">
+                {% for title in page.object_list %}
+                    <div class="result">
+                        <div class="poster-photo">
+                            {% if title.poster %}
+                                <img src="{{ title.poster }}">
+                            {% else %}
+                                <img src="{% static 'img/imdb.svg' %}">
+                            {% endif %}
+                        </div>
+                        <div class="result-info">
+                            <div class="title-summary">
+                                <div class="title-name">
+                                    <h2><a href="https://www.imdb.com/title/{{ title.imdb_id }}/">{{ title.title }}</a></h2>
+                                </div>
+                                {% if title.imdb_rating %}
+                                    <div class="rating">
+                                        <h2>{{ title.imdb_rating }}</h2>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="title-type">
+                                <p>
+                                    {{ title.get_title_type_display }}
+                                </p>
+                            </div>
+                            <div class="title-year">
+                                <p>
+                                    {{ title.year_start }}{% if title.year_end %}-{{ title.year_end }}{% endif %}
+                                </p>
+                            </div>
+                            <div class="title-genre">
+                                {% if title.genre.all %}
+                                    {% for genre in title.genre.all %}
+                                        <span class="genre">
+                                            {{ genre.name }}
+                                        </span>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            {% if title.plot %}
+                                <div class="plot">
+                                    <p>{{ title.plot }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="pagination">
+                {% if page %}
+                    {% if page.number != 1 %}
+                        <a class="page first-page" href="?q={{ request.GET.q }}&page=1">
+                          &laquo; First
+                        </a>
+                    {% endif %}
+                    {% if page.has_previous %}
+                        <a class="page" href="?q={{ request.GET.q }}&page={{ page.previous_page_number }}">
+                          {{ page.previous_page_number }}
+                        </a>
+                    {% endif %}
+                    <span class="page">
+                      {{ page.number }}
+                    </span>
+                    {% if page.has_next %}
+                        <a  class="page" href="?q={{ request.GET.q }}&page={{ page.next_page_number }}">
+                          {{ page.next_page_number }}
+                        </a>
+                    {% endif %}
+                    {% if page.number != page.paginator.num_pages %}
+                        <a  class="page last-page" href="?q={{ request.GET.q }}&page={{ page.paginator.num_pages }}">
+                          &raquo; Last
+                        </a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </article>
+    </main>
+</body>
+<script type="text/javascript" src="{% static 'js/htmx.min.js' %}" defer></script>

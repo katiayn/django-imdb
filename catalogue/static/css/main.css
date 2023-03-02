@@ -1,0 +1,183 @@
+html {
+    width: 100%;
+    height: 100%;
+    background: #1b1b1b;
+}
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    color: #999999;
+}
+
+main {
+    color: #999999;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    margin: auto;
+    display: block;
+}
+
+input.search-input {
+    border-radius: 30px;
+    width: 300px;
+    height: 35px;
+    padding: 0 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search {
+    margin: 1rem;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+    margin: 0 auto;
+}
+
+div.results {
+    display: flex;
+    flex-direction: column;
+}
+
+div.result {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+
+.result-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 0 10px;
+}
+
+.title-summary {
+    margin: 2px;
+}
+
+.title-name {
+    float: left;
+}
+
+.rating {
+    float: left;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.title-type {
+    font-weight: 500;
+    font-size: large;
+}
+
+.title-year {
+    font-weight: 400;
+    font-size: medium;
+}
+
+.title-genre {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: .2rem;
+    gap: .5rem;
+}
+
+.genre {
+    padding: 0 .5rem;
+    border-radius: 20px;
+    background-color: #555555;
+    font-weight: 500;
+    font-size: small;
+}
+
+.plot {
+    font-weight: 400;
+    font-size: medium;
+}
+
+.title h1 {
+    margin: 1rem;
+    font-weight: 700;
+}
+
+.rating h2 {
+    color: #e35f5f;
+}
+
+.poster-photo img {
+    float: top;
+    width: 150px;
+    height: 224px;
+    object-fit: cover;
+    padding: 10px;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
+    font-size: medium;
+}
+
+.page {
+    padding: 1rem;
+}
+
+.first-page,
+.last-page {
+    text-decoration: none;
+}
+
+.load-more {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+button {
+    border-radius: 30px;
+    width: 200px;
+    height: 35px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: small;
+    background: #e0e0e0;
+}
+
+
+p {
+    padding: 0;
+    margin: .2rem 0 .2rem 0;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    color: #e0e0e0;
+}
