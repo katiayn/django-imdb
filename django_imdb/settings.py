@@ -32,9 +32,9 @@ SECRET_KEY = env.str('SECRET_KEY', default=get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.fly.dev']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'django-imdb.fly.dev']
 
-CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
+CSRF_TRUSTED_ORIGINS = ['https://django-imdb.fly.dev']
 
 # Application definition
 
