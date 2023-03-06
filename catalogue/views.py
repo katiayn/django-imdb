@@ -4,6 +4,10 @@ from django.shortcuts import render
 from catalogue.models import Title
 
 
+def home(request):
+    return render(request, 'home.html')  # base template
+
+
 def get_page(request):
     search = request.GET.get('q')
     page_num = request.GET.get('page', 1)
@@ -17,7 +21,7 @@ def get_page(request):
 def search(request):
     return render(
         request=request,
-        template_name='home.html',
+        template_name='search.html',
         context={
             'page': get_page(request)
         }
@@ -34,4 +38,4 @@ def partial_search(request):
                 'page': get_page(request)
             }
         )
-    return render(request, 'partial_home.html')  # base template
+    return render(request, 'partial_search.html')  # base template

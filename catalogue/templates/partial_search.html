@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load django_htmx %}
+{% load static %}
+
+{% block content %}
+<header>
+    <div class="title">
+        <h1>Django IMDb Catalogue</h1>
+        <a href="{% url 'search' %}">Go to Search</a>
+    </div>
+    <div class="search">
+        <form hx-get="{% url 'partial_search' %}"
+              hx-target="#results"
+              hx-trigger="submit, input delay:0.2s"
+              class="form"
+        >
+            <input type="text"
+                   class="search-input"
+                   name="q"
+                   value="{{ request.GET.q }}"
+                   placeholder="Search for a title"
+            >
+        </form>
+    </div>
+</header>
+<main>
+    <article id="results">
+        <div class="results">
+            {% include 'partial_results.html' %}
+        </div>
+    </article>
+</main>
+{% endblock %}
