@@ -42,7 +42,7 @@ input.search-input {
     margin: 1rem;
 }
 
-article {
+section {
     display: flex;
     flex-direction: column;
     width: 750px;

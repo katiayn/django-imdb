@@ -10,8 +10,7 @@
     </div>
     <div class="search">
         <form action="{% url 'search' %}" class="form">
-            <input type="text"
-                   class="search-input"
+            <input class="search-input"
                    name="q"
                    value="{{ request.GET.q }}"
                    placeholder="Search for a title"
@@ -20,7 +19,7 @@
     </div>
 </header>
 <main>
-    <article id="results">
+    <section id="results">
         <div class="results">
             {% for title in page.object_list %}
                 <div class="result">
@@ -98,6 +97,6 @@
                 {% endif %}
             {% endif %}
         </div>
-    </article>
+    </section>
 </main>
 {% endblock %}

@@ -10,25 +10,20 @@
         <a href="{% url 'search' %}">Go to Search</a>
     </div>
     <div class="search">
-        <form hx-get="{% url 'partial_search' %}"
-              hx-target="#results"
-              hx-trigger="submit, input delay:0.2s"
-              class="form"
+        <input class="search-input"
+               name="q"
+               placeholder="Search for a title"
+               hx-get="{% url 'partial_search' %}"
+               hx-target="#results"
+               hx-trigger="input delay:0.2s"
         >
-            <input type="text"
-                   class="search-input"
-                   name="q"
-                   value="{{ request.GET.q }}"
-                   placeholder="Search for a title"
-            >
-        </form>
     </div>
 </header>
 <main>
-    <article id="results">
+    <section id="results">
         <div class="results">
             {% include 'partial_results.html' %}
         </div>
-    </article>
+    </section>
 </main>
 {% endblock %}
