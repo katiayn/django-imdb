@@ -14,30 +14,24 @@ def get_page(request):
     return page
 
 
-def home(request):
-    return render(request, 'home.html')
-
-
 def search(request):
     return render(
-        request,
-        'home.html',
+        request=request,
+        template_name='home.html',
         context={
             'page': get_page(request)
         }
     )
-
-
-def partial_home(request):
-    return render(request, 'partial_home.html')
 
 
 def partial_search(request):
-    return render(
-        request,
-        'partial_results.html',
-        context={
-            'page': get_page(request)
-        }
-    )
-
+    if request.htmx:
+        print('HTMX')
+        return render(
+            request=request,
+            template_name='partial_results.html',  # partial template
+            context={
+                'page': get_page(request)
+            }
+        )
+    return render(request, 'partial_home.html')  # base template

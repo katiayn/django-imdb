@@ -10,12 +10,15 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="{% static 'js/htmx.min.js' %}" defer></script>
 </head>
 <body>
     <header>
         <div class="title">
             <h1>Django IMDb Catalogue</h1>
-            <a href="{% url 'home' %}">Go to Home</a>
+            <a href="{% url 'search' %}">Go to Search</a>
         </div>
         <div class="search">
             <form hx-get="{% url 'partial_search' %}"
@@ -40,4 +43,3 @@
         </article>
     </main>
 </body>
-<script type="text/javascript" src="{% static 'js/htmx.min.js' %}" defer></script>
