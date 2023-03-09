@@ -1,10 +1,12 @@
 # Django IMDB Catalogue
 
-This is an example project demonstrating how to take advantage of HTMX requests to do partial rendering for List Views in Django.
+This is an example project demonstrating how to take advantage of HTMX requests to do partial rendering for list view in Django.
 
 You can find here:
 - Dynamic Search: search functionality without reloading the page.
 - "Load More": button to add additional results dynamically to the page.
+
+![django-imdb-catalogue-partial-search](https://user-images.githubusercontent.com/13651115/224088229-85b28c30-4b55-4393-b25c-719a01f2df2b.gif)
 
 ## Local Development
 
