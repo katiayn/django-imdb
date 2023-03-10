@@ -8,34 +8,41 @@ def home(request):
     return render(request, 'home.html')  # base template
 
 
-def get_page(request):
+def search(request):
     search = request.GET.get('q')
     page_num = request.GET.get('page', 1)
 
-    titles = Title.objects.filter(title__icontains=search) if search else Title.objects.none()
+    if search:
+        titles = Title.objects.filter(title__icontains=search)
+    else:
+        titles = Title.objects.none()
     page = Paginator(object_list=titles, per_page=5).get_page(page_num)
 
-    return page
-
-
-def search(request):
     return render(
         request=request,
         template_name='search.html',
         context={
-            'page': get_page(request)
+            'page': page
         }
     )
 
 
 def partial_search(request):
     if request.htmx:
-        print('HTMX')
+        search = request.GET.get('q')
+        page_num = request.GET.get('page', 1)
+
+        if search:
+            titles = Title.objects.filter(title__icontains=search)
+        else:
+            titles = Title.objects.none()
+        page = Paginator(object_list=titles, per_page=5).get_page(page_num)
+
         return render(
             request=request,
             template_name='partial_results.html',  # partial template
             context={
-                'page': get_page(request)
+                'page': page
             }
         )
     return render(request, 'partial_search.html')  # base template

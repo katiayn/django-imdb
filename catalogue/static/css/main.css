@@ -49,11 +49,6 @@ section {
     margin: 0 auto;
 }
 
-div.results {
-    display: flex;
-    flex-direction: column;
-}
-
 div.result {
     display: flex;
     flex-direction: row;

@@ -55,7 +55,7 @@
                 <button
                     hx-get="{% url 'partial_search' %}"
                     hx-target="#load-more"
-                    hx-vals='{"page": "{{ page.next_page_number }}", "q": "{{ request.GET.q }}"}'
+                    hx-vals='{"q": "{{ request.GET.q }}", "page": "{{ page.next_page_number }}"}'
                     hx-swap="outerHTML"
                 >
                     Load More
