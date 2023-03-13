@@ -2,6 +2,8 @@
 
 This is an example project demonstrating how to take advantage of HTMX requests to do partial rendering for list view in Django.
 
+The complete blog post can be found [here](https://fly.io/blog/a-no-js-solution-for-dynamic-search-in-django/).
+
 You can find here:
 - Dynamic Search: search functionality without reloading the page.
 - "Load More": button to add additional results dynamically to the page.
