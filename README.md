@@ -55,9 +55,22 @@ DJANGO_IMDB_OMDB_API_KEY=<your-omdb-api-key>
 
 > The default `DATABASE_URL` is `postgres://postgres:postgres@localhost:5432/imdb` (check `django_imdb/settings.py`).
 
-### Initial data
+### Setup Initial Data
 
 After generating the OMDB API Key, you can run the command to create the initial data:
 ```bash
-python3 manage.py setup_initial_data
+python3 manage.py add_imdb_titles
 ```
+
+### Add titles manually
+
+You can add more titles running the same command:
+```bash
+python3 manage.py add_imdb_titles --imdb_ids <imdb_id> <imdb_id>...
+```
+For example:
+```bash
+python3 manage.py add_imdb_titles --imdb_ids tt2306299 tt0773262 tt0108052 tt0102926
+```
+
+> `imdb_id` is the id from IMDb url: https://www.imdb.com/title/<imdb_id> (e.g. https://www.imdb.com/title/tt1853728/)
