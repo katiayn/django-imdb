@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from catalogue.exceptions import TitleDoesNotExist
+from catalogue.helpers import get_imdb_info
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -37,3 +40,41 @@ class Title(models.Model):
 
     def __str__(self):
         return self.title
+
+    @staticmethod
+    def get_or_create_title_by_imdb_id(imdb_id):
+        if Title.objects.filter(imdb_id=imdb_id).exists():
+            return True, Title.objects.get(imdb_id=imdb_id)
+
+        info = get_imdb_info(imdb_id)
+        try:
+            imdb_id = info['imdbID']
+
+            genres = []
+            genres_str = info['Genre'].split(',')
+            for genre in genres_str:
+                if genre != 'N/A':
+                    genre, _ = Genre.objects.get_or_create(name=genre)
+                    genres.append(genre)
+
+            year_start = info['Year']
+            year_end = None
+            if '–' in year_start:
+                year_start, year_end = year_start.split('–')
+
+            title = Title(
+                imdb_id=imdb_id,
+                title=info['Title'],
+                year_start=int(year_start),
+                year_end=int(year_end) if year_end else None,
+                title_type=info['Type'],
+                poster=info['Poster'],
+                plot=info['Plot'] if info['Plot'] != 'N/A' else None,
+                imdb_rating=float(info['imdbRating']),
+            )
+            title.save()
+            title.genre.set(genres)
+            return False, title
+        except KeyError:
+            raise TitleDoesNotExist(f'Title with IMDb {imdb_id} does not exist.')
+
