@@ -69,4 +69,4 @@ class Command(BaseCommand):
                 else:
                     self.stdout.write(self.style.WARNING(f'Title "{title.title}" already exist in the database!'))
             except TitleDoesNotExist:
-                self.stdout.write(self.style.ERROR(f'Title with imdb_id "{imdb_id} does not exist.'))
+                self.stdout.write(self.style.ERROR(f'Title with imdb_id "{imdb_id}" does not exist.'))
