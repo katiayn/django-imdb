@@ -36,6 +36,9 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'django-imdb.fly.dev']
 
 CSRF_TRUSTED_ORIGINS = ['https://django-imdb.fly.dev']
 
+if DEBUG:
+    INTERNAL_IPS = ['localhost', '127.0.0.1']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,9 +53,11 @@ INSTALLED_APPS = [
     'catalogue',
     # 3rd party apps
     'django_htmx',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -110,6 +115,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Caching
+# https://docs.djangoproject.com/en/4.1/ref/settings/#caches
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': env.str('REDIS_URL', 'redis://localhost:6379/'),
+        'KEY_PREFIX': 'imdb',
+        'TIMEOUT': 60 * 15,  # in seconds: 60 * 15 (15 minutes)
+    }
+}
 
 
 # Internationalization

@@ -14,4 +14,56 @@
         </h3>
     </div>
 </header>
+<main>
+    <div class="highest-rating">
+        <h2>My Highest Rating Title</h2>
+    </div>
+    <section id="results">
+        <div class="result">
+            <div class="poster-photo">
+                {% if title.poster %}
+                    <img src="{{ title.poster }}">
+                {% else %}
+                    <img src="{% static 'img/movie_logo.png' %}">
+                {% endif %}
+            </div>
+            <div class="result-info">
+                <div class="title-summary">
+                    <div class="title-name">
+                        <h2><a href="https://www.imdb.com/title/{{ title.imdb_id }}/">{{ title.title }}</a></h2>
+                    </div>
+                    {% if title.imdb_rating %}
+                        <div class="rating">
+                            <h2>{{ title.imdb_rating }}</h2>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="title-type">
+                    <p>
+                        {{ title.get_title_type_display }}
+                    </p>
+                </div>
+                <div class="title-year">
+                    <p>
+                        {{ title.year_start }}{% if title.year_end %}-{{ title.year_end }}{% endif %}
+                    </p>
+                </div>
+                <div class="title-genre">
+                    {% if title.genre.all %}
+                        {% for genre in title.genre.all %}
+                            <span class="genre">
+                                {{ genre.name }}
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% if title.plot %}
+                    <div class="plot">
+                        <p>{{ title.plot }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}

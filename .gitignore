@@ -1,9 +1,9 @@
 .DS_Store
-.idea
+.idea/
 .vscode
 
-.venv
+.venv/
 .env
-__pycache__
+__pycache__/
 *.pyc
 staticfiles/

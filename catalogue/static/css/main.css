@@ -25,6 +25,15 @@ main {
     align-items: center;
 }
 
+.highest-rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+
 input {
     margin: auto;
     display: block;
@@ -55,7 +64,7 @@ div.result {
     align-items: center;
     width: 100%;
     height: 100%;
-    margin: 10px;
+    margin: 0.5rem;
 }
 
 .result-info {

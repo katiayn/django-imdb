@@ -42,9 +42,11 @@ class Title(models.Model):
         return self.title
 
     @staticmethod
-    def get_or_create_title_by_imdb_id(imdb_id):
+    def get_or_create_title_by_imdb_id(imdb_id, reload=False):
         if Title.objects.filter(imdb_id=imdb_id).exists():
-            return True, Title.objects.get(imdb_id=imdb_id)
+            exists = True
+            if not reload:
+                return False, Title.objects.get(imdb_id=imdb_id)
 
         info = get_imdb_info(imdb_id)
         try:
@@ -62,19 +64,25 @@ class Title(models.Model):
             if '–' in year_start:
                 year_start, year_end = year_start.split('–')
 
-            title = Title(
-                imdb_id=imdb_id,
-                title=info['Title'],
-                year_start=int(year_start),
-                year_end=int(year_end) if year_end else None,
-                title_type=info['Type'],
-                poster=info['Poster'],
-                plot=info['Plot'] if info['Plot'] != 'N/A' else None,
-                imdb_rating=float(info['imdbRating']),
-            )
-            title.save()
-            title.genre.set(genres)
-            return False, title
+            if exists:
+                title = Title.objects.get(imdb_id=imdb_id)
+                title.imdb_rating = float(info['imdbRating'])
+                title.poster = info['Poster']
+                title.save()
+            else:
+                title = Title(
+                    imdb_id=imdb_id,
+                    title=info['Title'],
+                    year_start=int(year_start),
+                    year_end=int(year_end) if year_end else None,
+                    title_type=info['Type'],
+                    poster=info['Poster'],
+                    plot=info['Plot'] if info['Plot'] != 'N/A' else None,
+                    imdb_rating=float(info['imdbRating']),
+                )
+                title.save()
+                title.genre.set(genres)
+            return True, title
         except KeyError:
             raise TitleDoesNotExist(f'Title with IMDb {imdb_id} does not exist.')
 
