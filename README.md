@@ -10,6 +10,10 @@ You can find here:
 
 ![django-imdb-catalogue-partial-search](https://user-images.githubusercontent.com/13651115/224088229-85b28c30-4b55-4393-b25c-719a01f2df2b.gif)
 
+### Related Blog Posts:
+
+- [Caching with Redis](https://fly.io/django-beats/caching-in-django-with-redis/)
+
 ## Local Development
 
 Clone the project:
@@ -51,6 +55,7 @@ DEBUG=True
 SECRET_KEY=<your-secret-key>
 DATABASE_URL=postgres://postgres:postgres@localhost:5432/imdb
 DJANGO_IMDB_OMDB_API_KEY=<your-omdb-api-key>
+REDIS_URL=redis://localhost:6379/
 ```
 
 > The default `DATABASE_URL` is `postgres://postgres:postgres@localhost:5432/imdb` (check `django_imdb/settings.py`).
