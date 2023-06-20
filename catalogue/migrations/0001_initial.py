@@ -4,36 +4,68 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Genre',
+            name="Genre",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Title',
+            name="Title",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('imdb_id', models.CharField(max_length=12, unique=True)),
-                ('title', models.CharField(max_length=255)),
-                ('year_start', models.PositiveSmallIntegerField(blank=True, null=True)),
-                ('year_end', models.PositiveSmallIntegerField(blank=True, null=True)),
-                ('title_type', models.CharField(blank=True, choices=[('movie', 'Movie'), ('series', 'TV Series'), ('game', 'Video Game'), ('episode', 'Episode')], max_length=12, null=True)),
-                ('poster', models.URLField(blank=True, max_length=255, null=True)),
-                ('plot', models.TextField(blank=True, null=True)),
-                ('imdb_rating', models.FloatField()),
-                ('genre', models.ManyToManyField(blank=True, related_name='titles', to='catalogue.genre')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("imdb_id", models.CharField(max_length=12, unique=True)),
+                ("title", models.CharField(max_length=255)),
+                ("year_start", models.PositiveSmallIntegerField(blank=True, null=True)),
+                ("year_end", models.PositiveSmallIntegerField(blank=True, null=True)),
+                (
+                    "title_type",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("movie", "Movie"),
+                            ("series", "TV Series"),
+                            ("game", "Video Game"),
+                            ("episode", "Episode"),
+                        ],
+                        max_length=12,
+                        null=True,
+                    ),
+                ),
+                ("poster", models.URLField(blank=True, max_length=255, null=True)),
+                ("plot", models.TextField(blank=True, null=True)),
+                ("imdb_rating", models.FloatField()),
+                (
+                    "genre",
+                    models.ManyToManyField(
+                        blank=True, related_name="titles", to="catalogue.genre"
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-imdb_rating',),
+                "ordering": ("-imdb_rating",),
             },
         ),
     ]
