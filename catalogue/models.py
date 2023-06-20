@@ -43,6 +43,8 @@ class Title(models.Model):
             exists = True
             if not reload:
                 return False, Title.objects.get(imdb_id=imdb_id)
+        else:
+            exists = False
 
         info = get_imdb_info(imdb_id)
         try:
